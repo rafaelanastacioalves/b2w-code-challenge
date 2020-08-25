@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.core.widget.NestedScrollView
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	app:layout_anchor="@id/detail_entity_name_detail_appbar"
+	app:layout_anchorGravity="top|center"
+	app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+	<androidx.constraintlayout.widget.ConstraintLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		tools:context=".ui.pokemon_detailing.PokemonDetailingActivity">
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/pokemon_image"
+			android:layout_width="0dp"
+			android:layout_height="0dp"
+			android:scaleType="centerCrop"
+			android:transitionName="@string/entity_imageview_transition_name"
+			app:layout_constraintDimensionRatio="H,3:2"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent"
+			app:srcCompat="@drawable/ic_placeholder_map"/>
+
+		<TextView
+			android:id="@+id/abilitiesTitle"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Abilities"
+			android:layout_marginTop="32dp"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="parent" />
+
+		<androidx.gridlayout.widget.GridLayout
+			android:id="@+id/gridLayout"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginHorizontal="16dp"
+			android:layout_marginTop="16dp"
+			android:foregroundGravity="center"
+			app:columnCount="3"
+			app:rowCount="2"
+			app:layout_constraintTop_toBottomOf="@id/pokemon_image"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			tools:layout_editor_absoluteY="275dp">
+
+		</androidx.gridlayout.widget.GridLayout>
+
+
+	</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
+
