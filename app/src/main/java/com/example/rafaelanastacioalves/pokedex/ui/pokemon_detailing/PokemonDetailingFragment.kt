@@ -31,22 +31,9 @@ class PokemonDetailingFragment : Fragment(), View.OnClickListener {
 //        loadData()
     }
 
-    private fun bind(pokemon: Pokemon) {
-        bindTypes(pokemon)
-    }
-
-    private fun bindTypes(pokemon: Pokemon) {
-        var textView : TextView
-        var i = 0
-        for (item in pokemon.types){
-            textView = TextView(context)
-            textView.text = item.type.name
-            gridLayout.addView(textView,i)
-        }
-    }
 
     private fun generateData(): Pokemon {
-         return Gson().fromJson(getStringFromFile(requireContext(),"pikachu_ok_response.json"), Pokemon::class.java)
+        return Gson().fromJson(getStringFromFile(requireContext(), "pikachu_ok_response.json"), Pokemon::class.java)
     }
 
 
@@ -65,6 +52,60 @@ class PokemonDetailingFragment : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         bind(pokemon)
+    }
+
+    private fun bind(pokemon: Pokemon) {
+        bindTypes(pokemon)
+        bindAbilities(pokemon)
+        bindStats(pokemon.stats)
+
+    }
+
+    private fun bindStats(stats: List<Stat>) {
+        for (stat in stats){
+            when (stat.stat.name){
+                "hp" -> hpRatingBar.rating = convertToStar(stat.baseStat)
+                "attack" -> attackRatingBar.rating = convertToStar(stat.baseStat)
+                "defense" -> defenseRatingBar.rating = convertToStar(stat.baseStat)
+                "special-attack" -> specialAttackRatingBar.rating = convertToStar(stat.baseStat)
+                "special-defense" -> specialDefenseRatingBar.rating = convertToStar(stat.baseStat)
+                "speed" -> speedRatingBar.rating = convertToStar(stat.baseStat)
+            }
+
+        }
+    }
+
+    private fun convertToStar(baseStat: Int): Float {
+        return (baseStat.toFloat()/100)*5
+    }
+
+    private fun bindAbilities(pokemon: Pokemon) {
+        var textView: TextView
+        var i = 0
+        for (item in pokemon.abilities) {
+            textView = TextView(context)
+            textView.text = item.ability.name
+            textView.setPadding(8,8,8,8)
+            textView.setOnClickListener { v ->
+                Toast.makeText(context,
+                        item.ability.name,
+                        Toast.LENGTH_SHORT).show()
+            }
+            abilitiesGridLayout.addView(textView, i)
+            i++
+        }
+    }
+
+    private fun bindTypes(pokemon: Pokemon) {
+        var textView: TextView
+        var i = 0
+        for (item in pokemon.types) {
+            textView = TextView(context)
+            textView.text = item.type.name
+            textView.setPadding(4,4,4,4)
+            typeGridLayout.addView(textView, i)
+            i++
+        }
     }
 
     private fun setupActionBarWithTitle(title: String) {

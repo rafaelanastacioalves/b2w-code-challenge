@@ -27,18 +27,8 @@
 			app:layout_constraintTop_toTopOf="parent"
 			app:srcCompat="@drawable/ic_placeholder_map"/>
 
-		<TextView
-			android:id="@+id/abilitiesTitle"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:text="Abilities"
-			android:layout_marginTop="32dp"
-			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toBottomOf="parent" />
-
 		<androidx.gridlayout.widget.GridLayout
-			android:id="@+id/gridLayout"
+			android:id="@+id/typeGridLayout"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_marginHorizontal="16dp"
@@ -52,7 +42,144 @@
 			tools:layout_editor_absoluteY="275dp">
 
 		</androidx.gridlayout.widget.GridLayout>
+		<TextView
+			android:id="@+id/abilitiesTitle"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/abilities_title"
+			android:layout_marginTop="32dp"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/typeGridLayout" />
 
+		<androidx.gridlayout.widget.GridLayout
+			android:id="@+id/abilitiesGridLayout"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginHorizontal="16dp"
+			android:layout_marginTop="16dp"
+			android:foregroundGravity="center"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:columnCount="3"
+			app:rowCount="2"
+			app:layout_constraintTop_toBottomOf="@id/abilitiesTitle">
+
+		</androidx.gridlayout.widget.GridLayout>
+
+		<TextView
+			android:id="@+id/statsTitle"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="16dp"
+			android:text="@string/base_stats_title"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/abilitiesGridLayout" />
+
+		<TextView
+			android:id="@+id/hpTitle"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/hp_title"
+			app:layout_constraintBottom_toTopOf="@+id/hpRatingBar"
+			app:layout_constraintStart_toStartOf="@+id/hpRatingBar" />
+
+		<RatingBar
+			android:id="@+id/hpRatingBar"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="48dp"
+			android:numStars="5"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@+id/statsTitle" />
+
+		<RatingBar
+			android:id="@+id/attackRatingBar"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="48dp"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintHorizontal_bias="0.502"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@+id/hpRatingBar" />
+
+		<RatingBar
+			android:id="@+id/defenseRatingBar"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="48dp"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/attackRatingBar" />
+
+		<RatingBar
+			android:id="@+id/specialAttackRatingBar"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="48dp"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/defenseRatingBar" />
+
+		<RatingBar
+			android:id="@+id/specialDefenseRatingBar"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="48dp"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/specialAttackRatingBar" />
+
+		<RatingBar
+			android:id="@+id/speedRatingBar"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="48dp"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@+id/specialDefenseRatingBar" />
+
+		<TextView
+			android:id="@+id/attackTitle"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/attack_title"
+			app:layout_constraintBottom_toTopOf="@+id/attackRatingBar"
+			app:layout_constraintStart_toStartOf="@+id/attackRatingBar" />
+
+		<TextView
+			android:id="@+id/DefenceTitle"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/defence_title"
+			app:layout_constraintBottom_toTopOf="@+id/defenseRatingBar"
+			app:layout_constraintStart_toStartOf="@+id/defenseRatingBar" />
+
+		<TextView
+			android:id="@+id/specialAttackTitle"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/special_attack_title"
+			app:layout_constraintBottom_toTopOf="@+id/specialAttackRatingBar"
+			app:layout_constraintStart_toStartOf="@+id/specialAttackRatingBar" />
+
+		<TextView
+			android:id="@+id/specialDefenseTitle"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/special_defense_title"
+			app:layout_constraintBottom_toTopOf="@+id/specialDefenseRatingBar"
+			app:layout_constraintStart_toStartOf="@+id/specialDefenseRatingBar" />
+
+		<TextView
+			android:id="@+id/speedTitle"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/speed_title"
+			app:layout_constraintBottom_toTopOf="@+id/speedRatingBar"
+			app:layout_constraintStart_toStartOf="@+id/speedRatingBar" />
 
 	</androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
