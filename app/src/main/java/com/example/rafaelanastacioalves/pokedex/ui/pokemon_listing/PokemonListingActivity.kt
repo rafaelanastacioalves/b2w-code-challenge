@@ -33,7 +33,7 @@ class PokemonListingActivity : AppCompatActivity(), RecyclerViewClickListener{
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setupViews()
+        setContentView(R.layout.pokemon_listing_activity)
         setupRecyclerView()
         configureSearch()
         loadData()
@@ -83,10 +83,6 @@ class PokemonListingActivity : AppCompatActivity(), RecyclerViewClickListener{
         })
     }
 
-    private fun setupViews() {
-        setContentView(R.layout.pokemon_listing_activity)
-
-    }
 
     private fun setupRecyclerView() {
         val layoutManager = LinearLayoutManager(applicationContext)

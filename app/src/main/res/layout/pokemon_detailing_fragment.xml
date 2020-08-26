@@ -15,17 +15,33 @@
 		android:layout_height="match_parent"
 		tools:context=".ui.pokemon_detailing.PokemonDetailingActivity">
 
-		<androidx.appcompat.widget.AppCompatImageView
-			android:id="@+id/pokemon_image"
-			android:layout_width="0dp"
-			android:layout_height="0dp"
-			android:scaleType="centerCrop"
-			android:transitionName="@string/entity_imageview_transition_name"
-			app:layout_constraintDimensionRatio="H,3:2"
+		<FrameLayout
+			android:id="@+id/imageViewPagerContainer"
+
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintTop_toTopOf="parent"
-			app:srcCompat="@drawable/ic_placeholder_map"/>
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content">
+
+
+			<androidx.viewpager2.widget.ViewPager2
+				android:id="@+id/imageViewPager"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:scaleType="centerCrop"
+				android:transitionName="@string/entity_imageview_transition_name"
+				tools:listitem="@layout/pokemon_detailing_photos_viewholder" />
+			<com.google.android.material.tabs.TabLayout
+				android:id="@+id/tabLayout"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				app:tabBackground="@drawable/selector_ite_tab_viewpager"
+				app:tabIndicatorHeight="0dp"
+				android:layout_gravity="center|bottom"
+				android:layout_marginBottom="4dp" />
+		</FrameLayout>
+
 
 		<androidx.gridlayout.widget.GridLayout
 			android:id="@+id/typeGridLayout"
@@ -36,7 +52,7 @@
 			android:foregroundGravity="center"
 			app:columnCount="3"
 			app:rowCount="2"
-			app:layout_constraintTop_toBottomOf="@id/pokemon_image"
+			app:layout_constraintTop_toBottomOf="@id/imageViewPagerContainer"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="parent"
 			tools:layout_editor_absoluteY="275dp">
@@ -47,6 +63,7 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:text="@string/abilities_title"
+			android:textSize="@dimen/details_item_title_size"
 			android:layout_marginTop="32dp"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="parent"
@@ -72,6 +89,7 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_marginTop="16dp"
+			android:textSize="@dimen/details_item_title_size"
 			android:text="@string/base_stats_title"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="parent"

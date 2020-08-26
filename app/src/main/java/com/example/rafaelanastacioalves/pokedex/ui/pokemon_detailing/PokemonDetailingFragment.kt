@@ -9,22 +9,21 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.rafaelanastacioalves.pokedex.R
 import com.example.rafaelanastacioalves.pokedex.common.RestHelper.getStringFromFile
-import com.example.rafaelanastacioalves.pokedex.domain.entities.EntityDetails
 import com.example.rafaelanastacioalves.pokedex.domain.entities.pokemon.Pokemon
+import com.example.rafaelanastacioalves.pokedex.domain.entities.pokemon.Sprites
+import com.example.rafaelanastacioalves.pokedex.domain.entities.pokemon.Stat
+import com.google.android.material.tabs.TabLayoutMediator
 import com.google.gson.Gson
-import com.squareup.picasso.Callback
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.pokemon_detailing_fragment.*
 
 
 
 class PokemonDetailingFragment : Fragment(), View.OnClickListener {
     lateinit private var mPokemonDetailingViewModel: PokemonDetailingViewModel
-    lateinit private var pokemon : Pokemon
+    lateinit private var pokemon: Pokemon
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         pokemon = generateData()
@@ -32,15 +31,23 @@ class PokemonDetailingFragment : Fragment(), View.OnClickListener {
     }
 
 
+
+
     private fun generateData(): Pokemon {
         return Gson().fromJson(getStringFromFile(requireContext(), "pikachu_ok_response.json"), Pokemon::class.java)
     }
 
+    private fun loadData() {
+        val pokemonName = arguments!!.getString(POKEMON_NAME)
+        mPokemonDetailingViewModel = ViewModelProvider.NewInstanceFactory().create(PokemonDetailingViewModel::class.java)
+//        mPokemonDetailingViewModel.loadData(pokemonName).observe(this, Observer { entityDetails -> setViewsWith(entityDetails?.data) })
 
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflateViews(inflater, container)
+        val views = inflateViews(inflater, container)
+        return views
     }
 
 
@@ -51,19 +58,47 @@ class PokemonDetailingFragment : Fragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupActionBarWithTitle(pokemon.name)
+        setupViewPager()
         bind(pokemon)
+    }
+
+    private fun setupViewPager() {
+        val adapter: PokemonImageAdapter = PokemonImageAdapter()
+        imageViewPager.adapter = adapter
+        TabLayoutMediator(tabLayout, imageViewPager, { tab, position ->
+
+        }).attach()
+
     }
 
     private fun bind(pokemon: Pokemon) {
         bindTypes(pokemon)
         bindAbilities(pokemon)
         bindStats(pokemon.stats)
+        bindPhotos(pokemon.sprites)
+
+    }
+
+    private fun bindPhotos(sprites: Sprites) {
+
+        (imageViewPager.adapter as PokemonImageAdapter).apply {
+            list = listOf(sprites.frontDefault,
+                    sprites.backDefault,
+                    sprites.frontShiny,
+                    sprites.backShiny,
+                    sprites.frontFemale,
+                    sprites.backFemale,
+                    sprites.frontShinyFemale,
+                    sprites.backShinyFemale)
+            notifyDataSetChanged()
+        }
 
     }
 
     private fun bindStats(stats: List<Stat>) {
-        for (stat in stats){
-            when (stat.stat.name){
+        for (stat in stats) {
+            when (stat.stat.name) {
                 "hp" -> hpRatingBar.rating = convertToStar(stat.baseStat)
                 "attack" -> attackRatingBar.rating = convertToStar(stat.baseStat)
                 "defense" -> defenseRatingBar.rating = convertToStar(stat.baseStat)
