@@ -60,7 +60,7 @@ class PokemonDetailingFragment : Fragment(), View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
         setupActionBarWithTitle(pokemon.name)
         setupViewPager()
-        bind(pokemon)
+        pokemonDetailingViewLogic.bind(pokemon)
     }
 
     private fun setupViewPager() {
@@ -69,91 +69,15 @@ class PokemonDetailingFragment : Fragment(), View.OnClickListener {
         TabLayoutMediator(tabLayout, imageViewPager, { tab, position ->
 
         }).attach()
-
     }
-
-    private fun bind(pokemon: Pokemon) {
-        bindTypes(pokemon)
-        bindAbilities(pokemon)
-        bindStats(pokemon.stats)
-        bindPhotos(pokemon.sprites)
-
-    }
-
-    private fun bindPhotos(sprites: Sprites) {
-
-        (imageViewPager.adapter as PokemonImageAdapter).apply {
-            list = listOf(sprites.frontDefault,
-                    sprites.backDefault,
-                    sprites.frontShiny,
-                    sprites.backShiny,
-                    sprites.frontFemale,
-                    sprites.backFemale,
-                    sprites.frontShinyFemale,
-                    sprites.backShinyFemale)
-            notifyDataSetChanged()
-        }
-
-    }
-
-    private fun bindStats(stats: List<Stat>) {
-        for (stat in stats) {
-            when (stat.stat.name) {
-                "hp" -> hpRatingBar.rating = convertToStar(stat.baseStat)
-                "attack" -> attackRatingBar.rating = convertToStar(stat.baseStat)
-                "defense" -> defenseRatingBar.rating = convertToStar(stat.baseStat)
-                "special-attack" -> specialAttackRatingBar.rating = convertToStar(stat.baseStat)
-                "special-defense" -> specialDefenseRatingBar.rating = convertToStar(stat.baseStat)
-                "speed" -> speedRatingBar.rating = convertToStar(stat.baseStat)
-            }
-
-        }
-    }
-
-    private fun convertToStar(baseStat: Int): Float {
-        return (baseStat.toFloat()/100)*5
-    }
-
-    private fun bindAbilities(pokemon: Pokemon) {
-        var textView: TextView
-        var i = 0
-        for (item in pokemon.abilities) {
-            textView = TextView(context)
-            textView.text = item.ability.name
-            textView.setPadding(8,8,8,8)
-            textView.setOnClickListener { v ->
-                Toast.makeText(context,
-                        item.ability.name,
-                        Toast.LENGTH_SHORT).show()
-            }
-            abilitiesGridLayout.addView(textView, i)
-            i++
-        }
-    }
-
-    private fun bindTypes(pokemon: Pokemon) {
-        var textView: TextView
-        var i = 0
-        for (item in pokemon.types) {
-            textView = TextView(context)
-            textView.text = item.type.name
-            textView.setPadding(4,4,4,4)
-            typeGridLayout.addView(textView, i)
-            i++
-        }
-    }
-
     private fun setupActionBarWithTitle(title: String) {
         val mActivity = activity as AppCompatActivity?
         val actionBar = mActivity!!.supportActionBar
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true)
             actionBar.title = title
-
-
         }
     }
-
 
     override fun onClick(v: View) {
     }

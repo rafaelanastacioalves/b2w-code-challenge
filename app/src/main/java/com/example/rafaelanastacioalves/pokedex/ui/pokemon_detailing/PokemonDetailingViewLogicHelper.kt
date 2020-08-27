@@ -1,0 +1,3 @@
+package com.example.rafaelanastacioalves.pokedex.ui.pokemon_detailing
+
+internal class ViewLogicHelper
