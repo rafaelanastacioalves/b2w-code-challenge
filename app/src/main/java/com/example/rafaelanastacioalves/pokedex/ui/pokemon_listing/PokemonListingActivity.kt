@@ -15,7 +15,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.rafaelanastacioalves.pokedex.R
 import com.example.rafaelanastacioalves.pokedex.domain.entities.MainEntity
-import com.example.rafaelanastacioalves.pokedex.domain.entities.Result
+import com.example.rafaelanastacioalves.pokedex.domain.entities.Resource
+import com.example.rafaelanastacioalves.pokedex.domain.entities.PokemonReference
 import com.example.rafaelanastacioalves.pokedex.ui.pokemon_detailing.PokemonDetailingActivity
 import com.example.rafaelanastacioalves.pokedex.ui.pokemon_detailing.PokemonDetailingFragment
 import com.example.rafaelanastacioalves.pokedex.listeners.RecyclerViewClickListener
@@ -36,8 +37,8 @@ class PokemonListingActivity : AppCompatActivity(), RecyclerViewClickListener{
         setContentView(R.layout.pokemon_listing_activity)
         setupRecyclerView()
         configureSearch()
-        loadData()
-
+        subscribe()
+        mPokemonListingViewModel.loadDataIfNecessary()
     }
 
     private fun configureSearch() {
@@ -54,32 +55,37 @@ class PokemonListingActivity : AppCompatActivity(), RecyclerViewClickListener{
         })
     }
 
-    private fun loadData() {
-        pokemonListingAdapter.setItems(generateData())
-    }
+//    private fun loadData() {
+//        pokemonListingAdapter.setItems(generateData())
+//    }
 
-    private fun generateData(): List<Result>? {
-        val list : List<Result> = listOf(
-                Result("wobbuffet", "https://pokeapi.co/api/v2/pokemon/202/"),
-                Result("girafarig", "https://pokeapi.co/api/v2/pokemon/203/"),
-                Result("pineco", "https://pokeapi.co/api/v2/pokemon/204/"),
-                Result("forretress", "https://pokeapi.co/api/v2/pokemon/205/"),
-                Result("dunsparce", "https://pokeapi.co/api/v2/pokemon/206/"),
-                Result("gligar", "https://pokeapi.co/api/v2/pokemon/207/"),
-                Result("steelix", "https://pokeapi.co/api/v2/pokemon/208/"),
-                Result("snubbull", "https://pokeapi.co/api/v2/pokemon/209/"),
-                Result("granbull", "https://pokeapi.co/api/v2/pokemon/210/"),
-                Result("qwilfish", "https://pokeapi.co/api/v2/pokemon/211/"),
-                Result("scizor", "https://pokeapi.co/api/v2/pokemon/212/"),
-                Result("shuckle", "https://pokeapi.co/api/v2/pokemon/213/")
-        )
-        return list
-    }
+//    private fun generateData(): List<PokemonReference>? {
+//        val list : List<PokemonReference> = listOf(
+//                PokemonReference("wobbuffet", "https://pokeapi.co/api/v2/pokemon/202/"),
+//                PokemonReference("girafarig", "https://pokeapi.co/api/v2/pokemon/203/"),
+//                PokemonReference("pineco", "https://pokeapi.co/api/v2/pokemon/204/"),
+//                PokemonReference("forretress", "https://pokeapi.co/api/v2/pokemon/205/"),
+//                PokemonReference("dunsparce", "https://pokeapi.co/api/v2/pokemon/206/"),
+//                PokemonReference("gligar", "https://pokeapi.co/api/v2/pokemon/207/"),
+//                PokemonReference("steelix", "https://pokeapi.co/api/v2/pokemon/208/"),
+//                PokemonReference("snubbull", "https://pokeapi.co/api/v2/pokemon/209/"),
+//                PokemonReference("granbull", "https://pokeapi.co/api/v2/pokemon/210/"),
+//                PokemonReference("qwilfish", "https://pokeapi.co/api/v2/pokemon/211/"),
+//                PokemonReference("scizor", "https://pokeapi.co/api/v2/pokemon/212/"),
+//                PokemonReference("shuckle", "https://pokeapi.co/api/v2/pokemon/213/")
+//        )
+//        return list
+//    }
 
 
     private fun subscribe() {
-        mPokemonListingViewModel.mainEntityListLiveData.observeForever(Observer { mainEntities ->
-//            populateRecyclerView(mainEntities)
+        mPokemonListingViewModel.mainEntityListLiveData.observeForever(Observer { resource ->
+            when(resource.status){
+                Resource.Status.SUCCESS -> pokemonListingAdapter.setItems(resource.data)
+//                Resource.Status.INTERNAL_SERVER_ERROR -> TODO()
+//                Resource.Status.GENERIC_ERROR -> TODO()
+//                Resource.Status.LOADING -> TODO()
+            }
         })
     }
 
@@ -92,7 +98,15 @@ class PokemonListingActivity : AppCompatActivity(), RecyclerViewClickListener{
     }
 
 
-
+//    private fun populateRecyclerView(list: Resource<List<MainEntity>>?) {
+//        if (list == null) {
+//            pokemonListingAdapter!!.setItems(null)
+//
+//        } else if (list.data!=null) {
+//            pokemonListingAdapter!!.setItems(list.data)
+//        }
+//
+//    }
 
 
     override fun onClick(view: View, position: Int) {

@@ -5,13 +5,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rafaelanastacioalves.pokedex.R
-import com.example.rafaelanastacioalves.pokedex.domain.entities.Result
+import com.example.rafaelanastacioalves.pokedex.domain.entities.PokemonReference
 import com.example.rafaelanastacioalves.pokedex.listeners.RecyclerViewClickListener
 
 class PokemonListingAdapter(context: Context) : RecyclerView.Adapter<PokemonLIstingViewHolder>() {
     lateinit private var recyclerViewClickListener: RecyclerViewClickListener
-    private var mainList: List<Result>? = null
-    private var intermediateList: List<Result>? = null
+    private var mainList: List<PokemonReference>? = null
+    private var intermediateList: List<PokemonReference>? = null
 
     private val mContext: Context = context
 
@@ -19,11 +19,11 @@ class PokemonListingAdapter(context: Context) : RecyclerView.Adapter<PokemonLIst
         this.recyclerViewClickListener = aRVC;
     }
 
-    fun getItems(): List<Result>? {
+    fun getItems(): List<PokemonReference>? {
         return if (intermediateList!=null) intermediateList else {mainList}
     }
 
-    fun setItems(items: List<Result>?) {
+    fun setItems(items: List<PokemonReference>?) {
         this.mainList = items
         updateList()
     }
@@ -34,7 +34,7 @@ class PokemonListingAdapter(context: Context) : RecyclerView.Adapter<PokemonLIst
     }
 
     override fun onBindViewHolder(holder: PokemonLIstingViewHolder, position: Int ) {
-        val pokemonResult = getItems()?.get(position) as Result;
+        val pokemonResult = getItems()?.get(position) as PokemonReference;
         holder.bind(pokemonResult, mContext)
     }
 
