@@ -4,11 +4,15 @@ import android.content.Context
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.example.rafaelanastacioalves.pokedex.common.RestHelper
 import com.example.rafaelanastacioalves.pokedex.domain.entities.PokemonReference
+import com.example.rafaelanastacioalves.pokedex.domain.entities.pokemon.Pokemon
+import com.google.gson.Gson
 import kotlinx.coroutines.runBlocking
 import org.hamcrest.CoreMatchers
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.core.StringContains
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -29,15 +33,19 @@ class AppDataBaseTest {
         AppDataBase.getInstance().appDAO()
     }
 
+    @Before
+    fun setup() {
+        AppDataBase.setupAtApplicationStartup(context)
+    }
+
     @Test
     fun when_savingPokemonReferenceList_Should_ReturnPokemonReferenceList() {
 
-        AppDataBase.setupAtApplicationStartup(context)
         runBlocking {
             testedDAO.deleteAllPokemonReferences()
         }
 
-        val mainEntityList: List<PokemonReference> = Arrays.asList(
+        val pokemonReferenceList: List<PokemonReference> = Arrays.asList(
                 PokemonReference("pikachu",
                         "http://1",
                         2,
@@ -48,7 +56,7 @@ class AppDataBaseTest {
                         1)
         )
         runBlocking {
-            testedDAO.savePokemonReferenceList(mainEntityList)
+            testedDAO.savePokemonReferenceList(pokemonReferenceList)
         }
 
         lateinit var restoredPokemonReferenceList: List<PokemonReference>
@@ -70,9 +78,6 @@ class AppDataBaseTest {
 
     @Test
     fun when_ThereIsNoPokemonReference_Should_Return_EmptyList() {
-        AppDataBase.setupAtApplicationStartup(context)
-        val testedDAO: DAO = testedDAO
-
 
         lateinit var restoredMainEntityList: List<PokemonReference>
         runBlocking {
@@ -81,6 +86,26 @@ class AppDataBaseTest {
         }
 
         assertThat(restoredMainEntityList.size, CoreMatchers.`is`(0))
+    }
+
+    @Test
+    fun when_savingPokemon_Should_returnPokemon() {
+        runBlocking {
+            testedDAO.deleteAllPokemon()
+        }
+
+        val pokemon = Gson().fromJson(RestHelper.getStringFromFile(context, "pikachu_ok_response.json"), Pokemon::class.java)
+        lateinit var pokemonFromDB : Pokemon
+        runBlocking {
+            testedDAO.savePokemon(pokemon)
+            pokemonFromDB = testedDAO.getPokemon("pikachu")
+        }
+
+        assertThat(pokemonFromDB.name, StringContains("pikachu"))
+        checkNotNull(pokemonFromDB.types)
+        checkNotNull(pokemonFromDB.sprites)
+        checkNotNull(pokemonFromDB.stats)
+        checkNotNull(pokemonFromDB.abilities)
     }
 
 }

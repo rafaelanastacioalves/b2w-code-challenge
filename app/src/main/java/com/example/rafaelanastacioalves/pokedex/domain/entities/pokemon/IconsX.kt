@@ -7,5 +7,5 @@ data class IconsX(
     @SerializedName("front_default")
     val frontDefault: String,
     @SerializedName("front_female")
-    val frontFemale: Any
+    val frontFemale: String
 )

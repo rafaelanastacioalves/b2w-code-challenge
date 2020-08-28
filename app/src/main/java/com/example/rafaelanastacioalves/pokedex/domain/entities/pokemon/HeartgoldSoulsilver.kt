@@ -7,17 +7,17 @@ data class HeartgoldSoulsilver(
     @SerializedName("back_default")
     val backDefault: String,
     @SerializedName("back_female")
-    val backFemale: Any,
+    val backFemale: String,
     @SerializedName("back_shiny")
     val backShiny: String,
     @SerializedName("back_shiny_female")
-    val backShinyFemale: Any,
+    val backShinyFemale: String,
     @SerializedName("front_default")
     val frontDefault: String,
     @SerializedName("front_female")
-    val frontFemale: Any,
+    val frontFemale: String,
     @SerializedName("front_shiny")
     val frontShiny: String,
     @SerializedName("front_shiny_female")
-    val frontShinyFemale: Any
+    val frontShinyFemale: String
 )

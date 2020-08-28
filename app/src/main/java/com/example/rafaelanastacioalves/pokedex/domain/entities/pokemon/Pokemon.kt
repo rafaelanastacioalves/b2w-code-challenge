@@ -1,29 +1,31 @@
 package com.example.rafaelanastacioalves.pokedex.domain.entities.pokemon
 
 
+import androidx.room.ColumnInfo
+import androidx.room.Embedded
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
+@Entity
 data class Pokemon(
-    val abilities: List<Ability>,
-    @SerializedName("base_experience")
-    val baseExperience: Int,
-    val forms: List<Form>,
-    @SerializedName("game_indices")
-    val gameIndices: List<GameIndice>,
-    val height: Int,
-    @SerializedName("held_items")
-    val heldItems: List<Any>,
-    val id: Int,
-    @SerializedName("is_default")
-    val isDefault: Boolean,
-    @SerializedName("location_area_encounters")
-    val locationAreaEncounters: String,
-    val moves: List<Move>,
-    val name: String,
-    val order: Int,
-    val species: Species,
-    val sprites: Sprites,
-    val stats: List<Stat>,
-    val types: List<Type>,
-    val weight: Int
-)
+        var id: Int,
+        @SerializedName("base_experience")
+        var baseExperience: Int,
+        @ColumnInfo(name = "is_default")
+        @SerializedName("is_default")
+        var isDefault: Boolean,
+        @SerializedName("location_area_encounters")
+        var locationAreaEncounters: String,
+        @Embedded
+        var sprites: Sprites,
+        var height: Int,
+        var weight: Int,
+        @PrimaryKey
+        var name: String,
+        var order: Int
+) {
+    lateinit var stats: ArrayList<Stat>
+    lateinit var types: ArrayList<Type>
+    lateinit var abilities: ArrayList<Ability>
+}

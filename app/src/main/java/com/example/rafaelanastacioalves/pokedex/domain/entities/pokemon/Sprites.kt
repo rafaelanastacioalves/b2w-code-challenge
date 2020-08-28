@@ -1,25 +1,40 @@
 package com.example.rafaelanastacioalves.pokedex.domain.entities.pokemon
 
 
+import androidx.room.ColumnInfo
+import androidx.room.Embedded
 import com.google.gson.annotations.SerializedName
 
-data class Sprites(
+ class Sprites() {
+    @ColumnInfo(name = "back_default")
     @SerializedName("back_default")
-    val backDefault: String,
+     var backDefault: String ? = null
+
+    @ColumnInfo(name = "back_female")
     @SerializedName("back_female")
-    val backFemale: Any,
+    var backFemale: String? = null
+
+    @ColumnInfo(name = "back_shiny")
     @SerializedName("back_shiny")
-    val backShiny: String,
+     var backShiny: String? = null
+
+    @ColumnInfo(name = "back_shiny_female")
     @SerializedName("back_shiny_female")
-    val backShinyFemale: Any,
+     var backShinyFemale: String? = null
+
+    @ColumnInfo(name = "front_default")
     @SerializedName("front_default")
-    val frontDefault: String,
+     var frontDefault: String? = null
+
+    @ColumnInfo(name = "front_female")
     @SerializedName("front_female")
-    val frontFemale: Any,
+     var frontFemale: String? = null
+
+    @ColumnInfo(name = "front_shiny")
     @SerializedName("front_shiny")
-    val frontShiny: String,
+     var frontShiny: String? = null
+
+    @ColumnInfo(name = "front_shiny_female")
     @SerializedName("front_shiny_female")
-    val frontShinyFemale: Any,
-    val other: Other,
-    val versions: Versions
-)
+     var frontShinyFemale: String? = null
+}
