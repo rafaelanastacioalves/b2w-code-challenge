@@ -10,20 +10,22 @@ import com.google.gson.Gson
 
 class Converters {
 
-    @TypeConverter
-    fun fromTypeListToStringvalue(list : ArrayList<Type>): String = Gson().toJson(list)
+    // TO LIST
 
     @TypeConverter
-    fun fromAbilityListToStringvalue(list : ArrayList<Ability>): String = Gson().toJson(list)
+    fun fromTypeListToStringvalue(list: ArrayList<Type>): String = Gson().toJson(list)
 
     @TypeConverter
-    fun fromStatListToStringvalue(list : ArrayList<Stat>): String = Gson().toJson(list)
+    fun fromAbilityListToStringvalue(list: ArrayList<Ability>): String = Gson().toJson(list)
+
+    @TypeConverter
+    fun fromStatListToStringvalue(list: ArrayList<Stat>): String = Gson().toJson(list)
 
     @TypeConverter
     fun fromSpritesToString(list : Sprites): String = Gson().toJson(list)
 
 
-
+    // FROM LIST
 
     @TypeConverter
     fun fromStringToTypeList(date: String) : ArrayList<Type> = Gson().fromJson(date, Array<Type>::class.java).toMutableList() as ArrayList<Type>

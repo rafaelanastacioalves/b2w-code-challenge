@@ -18,7 +18,6 @@ class PokemonLIstingViewHolder(override val containerView: View) : RecyclerView.
     constructor(itemView: View , clickListener: RecyclerViewClickListener) : this(itemView) {
         this.aRecyclerViewListener = clickListener
 
-
     }
     init {
         itemView.detail_container.setOnClickListener(this)

@@ -16,7 +16,6 @@ class PokemonDetailingActivity : AppCompatActivity() {
         setContentView(R.layout.pokemon_detailing_activity)
         setupActionBar()
 
-
         if (savedInstanceState == null) {
             // Create the detail fragment and add it to the activity
             // using a fragment transaction.
@@ -29,8 +28,7 @@ class PokemonDetailingActivity : AppCompatActivity() {
                     .add(R.id.entity_detail_fragment_container, fragment)
                     .commit()
 
-
-            supportPostponeEnterTransition()
+//            supportPostponeEnterTransition()
         }
     }
 
@@ -39,5 +37,4 @@ class PokemonDetailingActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
     }
-
 }

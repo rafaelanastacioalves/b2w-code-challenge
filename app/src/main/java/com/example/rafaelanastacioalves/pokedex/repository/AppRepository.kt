@@ -28,13 +28,7 @@ object AppRepository {
             }
 
             override suspend fun saveIntoDB(resultData: List<PokemonReference>?) {
-                for (i in 0 until limit) {
-                    resultData?.get(i)?.apply {
-                        this.offset = offset
-                        position = i + offset
-                    }
-                }
-                appDao.savePokemonReferenceList(resultData)
+                appDao.savePokemonReferenceList(resultData, offset, limit)
             }
 
         }.fromHttpAndDB()

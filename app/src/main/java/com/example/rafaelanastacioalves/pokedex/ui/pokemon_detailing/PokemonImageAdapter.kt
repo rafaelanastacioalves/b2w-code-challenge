@@ -28,7 +28,6 @@ class PokemonImageAdapter : RecyclerView.Adapter<PokemonImageViewHolder>() {
     override fun onBindViewHolder(holder: PokemonImageViewHolder, position: Int) {
             holder.bind(list?.get(position))
     }
-
 }
 
 class PokemonImageViewHolder(itemView: View) : ViewHolder(itemView) {
@@ -37,5 +36,4 @@ class PokemonImageViewHolder(itemView: View) : ViewHolder(itemView) {
         Picasso.get().load(url)
                 .into(itemView.imageViewHolder)
     }
-
 }

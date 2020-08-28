@@ -38,8 +38,6 @@ class PokemonListingAdapter(diffCallback : DiffUtil.ItemCallback<PokemonReferenc
         return if (intermediateList!=null) intermediateList else {currentList}
     }
 
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonLIstingViewHolder  {
         return PokemonLIstingViewHolder(LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.pokemon_listing_viewholder, parent, false), recyclerViewClickListener);
@@ -75,7 +73,4 @@ class PokemonListingAdapter(diffCallback : DiffUtil.ItemCallback<PokemonReferenc
         }
         notifyDataSetChanged()
     }
-
-
 }
-

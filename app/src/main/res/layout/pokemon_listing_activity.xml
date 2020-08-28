@@ -59,7 +59,7 @@
 			android:id="@+id/errorView"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="@string/erro_generico"
+			android:text="@string/generic_error"
 			android:layout_gravity="center"
 			android:visibility="gone"
 			style="@style/TextAppearance.AppCompat.Display2"/>

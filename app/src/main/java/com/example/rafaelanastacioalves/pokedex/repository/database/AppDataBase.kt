@@ -6,15 +6,12 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.example.rafaelanastacioalves.pokedex.domain.entities.PokemonReference
-import com.example.rafaelanastacioalves.pokedex.domain.entities.pokemon.Form
 import com.example.rafaelanastacioalves.pokedex.domain.entities.pokemon.Pokemon
-import com.example.rafaelanastacioalves.pokedex.domain.entities.pokemon.Type
-import com.example.rafaelanastacioalves.pokedex.domain.entities.pokemon.TypeDetails
 
 
 @Database(entities = [PokemonReference::class,
     Pokemon::class],
-        version = 5)
+        version = 1)
 @TypeConverters(Converters::class)
 abstract class AppDataBase : RoomDatabase() {
     abstract fun appDAO(): DAO

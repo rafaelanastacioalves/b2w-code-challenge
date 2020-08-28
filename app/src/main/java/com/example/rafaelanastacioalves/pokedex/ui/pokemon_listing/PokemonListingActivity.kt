@@ -47,13 +47,11 @@ class PokemonListingActivity : AppCompatActivity(), RecyclerViewClickListener{
         })
     }
 
-
     private fun subscribe() {
         mPokemonListingViewModel.pokemonReferenceLiveData.observeForever { returnedLIst ->
             pokemonListingAdapter.submitList(returnedLIst)
         }
     }
-
 
     private fun setupRecyclerView() {
         val layoutManager = LinearLayoutManager(applicationContext)
@@ -62,21 +60,15 @@ class PokemonListingActivity : AppCompatActivity(), RecyclerViewClickListener{
         recyclerView.adapter = pokemonListingAdapter
     }
 
-
-
-
     override fun onClick(view: View, position: Int) {
         val pokemon = pokemonListingAdapter.currentList!![position]
 
         val intent = Intent(this, PokemonDetailingActivity::class.java)
         intent.putExtra(PokemonDetailingFragment.POKEMON_NAME, pokemon?.name)
         startActivity(intent)
-
     }
 
     private fun animateIntro() {
         recyclerView.itemAnimator = AnimationIntroAnimator()
     }
-
-
 }

@@ -30,16 +30,8 @@ class PokemonDetailingFragment : Fragment(), View.OnClickListener {
     private val pokemonDetailingViewLogic: PokemonDetailingViewLogicHelper = PokemonDetailingViewLogicHelper(this)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        pokemon = generateData()
         loadData()
     }
-
-
-
-
-//    private fun generateData(): Pokemon {
-//        return Gson().fromJson(getStringFromFile(requireContext(), "pikachu_ok_response.json"), Pokemon::class.java)
-//    }
 
     private fun loadData() {
         val pokemonName = arguments!!.getString(POKEMON_NAME)
@@ -53,7 +45,6 @@ class PokemonDetailingFragment : Fragment(), View.OnClickListener {
                         setupActionBarWithTitle(it.name)
                         showMainView()
                     }
-
                 }
                 Resource.Status.INTERNAL_SERVER_ERROR -> {
                     hideLoading()
@@ -135,4 +126,4 @@ class PokemonDetailingFragment : Fragment(), View.OnClickListener {
         mainView.visibility = View.GONE
     }
 
-}// Required empty public constructor
+}

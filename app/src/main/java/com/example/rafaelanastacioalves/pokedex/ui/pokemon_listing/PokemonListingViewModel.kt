@@ -22,5 +22,4 @@ class PokemonListingViewModel : ViewModel() {
                 .setFetchExecutor(Executors.newFixedThreadPool(5))
                 .build()
     }
-
 }

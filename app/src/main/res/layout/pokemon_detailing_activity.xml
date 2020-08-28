@@ -7,7 +7,7 @@
                                                  tools:context=".ui.pokemon_detailing.PokemonDetailingActivity">
 
 	<com.google.android.material.appbar.AppBarLayout
-		android:id="@+id/detail_entity_name_detail_appbar"
+		android:id="@+id/appBar"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:elevation="@dimen/material_appbar_elevation"

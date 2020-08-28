@@ -79,13 +79,13 @@ class AppDataBaseTest {
     @Test
     fun when_ThereIsNoPokemonReference_Should_Return_EmptyList() {
 
-        lateinit var restoredMainEntityList: List<PokemonReference>
+        lateinit var restoredPokemonReferenceList: List<PokemonReference>
         runBlocking {
             testedDAO.deleteAllPokemonReferences()
-            restoredMainEntityList = testedDAO.getPokemonReferenceList(2)
+            restoredPokemonReferenceList = testedDAO.getPokemonReferenceList(2)
         }
 
-        assertThat(restoredMainEntityList.size, CoreMatchers.`is`(0))
+        assertThat(restoredPokemonReferenceList.size, CoreMatchers.`is`(0))
     }
 
     @Test

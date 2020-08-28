@@ -16,7 +16,7 @@
 		android:id="@+id/errorView"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:text="@string/erro_generico"
+		android:text="@string/generic_error"
 		tools:visibility="visible"
 		android:gravity="center"
 		style="@style/TextAppearance.AppCompat.Display2"
@@ -25,7 +25,7 @@
 	android:id="@+id/mainView"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	app:layout_anchor="@id/detail_entity_name_detail_appbar"
+	app:layout_anchor="@id/appBar"
 	app:layout_anchorGravity="top|center"
 	app:layout_behavior="@string/appbar_scrolling_view_behavior">
 

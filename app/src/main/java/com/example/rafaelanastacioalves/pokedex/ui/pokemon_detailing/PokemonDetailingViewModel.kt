@@ -26,7 +26,5 @@ internal class PokemonDetailingViewModel : ViewModel() {
     private fun handle(it: Resource<Pokemon>?) {
         entityDetails.postValue(it)
     }
-
-
 }
 

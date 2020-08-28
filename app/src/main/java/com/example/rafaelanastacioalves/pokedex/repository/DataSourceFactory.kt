@@ -13,6 +13,4 @@ class DataSourceFactory(private val viewModelScope: CoroutineScope) : DataSource
         sourceLiveData.postValue(source)
         return source
     }
-
-
 }

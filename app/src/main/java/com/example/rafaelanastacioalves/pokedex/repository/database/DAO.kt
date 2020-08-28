@@ -18,6 +18,16 @@ interface DAO {
     @Insert
     suspend fun savePokemonReferenceList(listResponse: List<PokemonReference>?)
 
+    suspend fun savePokemonReferenceList(listResponse: List<PokemonReference>?, offset: Int, limit: Int){
+        for (i in 0 until limit) {
+            listResponse?.get(i)?.apply {
+                this.offset = offset
+                position = i + offset
+            }
+        }
+        savePokemonReferenceList(listResponse)
+    }
+
     @Query("SELECT * FROM pokemon WHERE name = :name")
     suspend fun getPokemon(name : String) : Pokemon
 
