@@ -2,7 +2,7 @@
 
 Desafio tecnico da empresa B2W.
 
-![tela de listagem](captures/Screenshot_1595579604.png)     ![tela de listagem](captures/Screenshot_1595580050.png)
+![tela de listagem](captures/Screenshot_1598645593.png)     ![tela de detalhes do pokemon](captures/Screenshot_1598645603.png)
 
 ## Descrição técnica
 
