@@ -17,6 +17,9 @@ import com.example.rafaelanastacioalves.pokedex.domain.entities.pokemon.Pokemon
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.pokemon_detailing_fragment.*
+import kotlinx.android.synthetic.main.pokemon_detailing_fragment.errorView
+import kotlinx.android.synthetic.main.pokemon_detailing_fragment.progressBar
+import kotlinx.android.synthetic.main.pokemon_listing_activity.*
 
 
 /**
@@ -45,14 +48,25 @@ class PokemonDetailingFragment : Fragment(), View.OnClickListener {
             when (resource.status) {
                 Resource.Status.SUCCESS -> {
                     resource.data?.let {
+                        hideLoading()
                         pokemonDetailingViewLogic.bind(it)
                         setupActionBarWithTitle(it.name)
+                        showMainView()
                     }
 
                 }
-//                Resource.Status.INTERNAL_SERVER_ERROR -> TODO()
-//                Resource.Status.GENERIC_ERROR -> TODO()
-//                Resource.Status.LOADING -> TODO()
+                Resource.Status.INTERNAL_SERVER_ERROR -> {
+                    hideLoading()
+                    showErrorView()
+                }
+                Resource.Status.GENERIC_ERROR -> {
+                    hideLoading()
+                    showErrorView()
+                }
+                Resource.Status.LOADING -> {
+                    hideMainView()
+                    showLoading()
+                }
             }
         })
 
@@ -91,11 +105,34 @@ class PokemonDetailingFragment : Fragment(), View.OnClickListener {
     }
 
     override fun onClick(v: View) {
+        Toast.makeText(activity, "Comprado!", Toast.LENGTH_SHORT).show()
     }
 
     companion object {
         var POKEMON_NAME: String? = null
     }
 
+    fun showErrorView(){
+        errorView.visibility = View.VISIBLE
+    }
+    fun hideErrorView(){
+        errorView.visibility = View.GONE
+    }
+
+    fun showLoading() {
+        progressBar.visibility = View.VISIBLE
+    }
+
+    fun hideLoading() {
+        progressBar.visibility = View.GONE
+    }
+
+    fun showMainView(){
+        mainView.visibility = View.VISIBLE
+    }
+
+    fun hideMainView(){
+        mainView.visibility = View.GONE
+    }
 
 }// Required empty public constructor

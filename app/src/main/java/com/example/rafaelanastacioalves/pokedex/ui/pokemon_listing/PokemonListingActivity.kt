@@ -28,6 +28,7 @@ class PokemonListingActivity : AppCompatActivity(), RecyclerViewClickListener{
         super.onCreate(savedInstanceState)
         setContentView(R.layout.pokemon_listing_activity)
         setupRecyclerView()
+        animateIntro()
         configureSearch()
         subscribe()
     }
@@ -71,6 +72,10 @@ class PokemonListingActivity : AppCompatActivity(), RecyclerViewClickListener{
         intent.putExtra(PokemonDetailingFragment.POKEMON_NAME, pokemon?.name)
         startActivity(intent)
 
+    }
+
+    private fun animateIntro() {
+        recyclerView.itemAnimator = AnimationIntroAnimator()
     }
 
 
