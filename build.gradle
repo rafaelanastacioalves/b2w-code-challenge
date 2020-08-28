@@ -10,7 +10,7 @@ buildscript {
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.1'
+        classpath 'com.android.tools.build:gradle:4.0.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -31,7 +31,7 @@ allprojects {
 ext {
     compileSdkVersionExt = 28
     buildToolsVersionExt = "28.0.3"
-    minSdkVersionExt = 15
+    minSdkVersionExt = 21
     targetSdkVersionExt = 28
     retrofitExt = "2.6.+"
     okhttp3Ext = "3.10.0"
@@ -41,17 +41,18 @@ ext {
     archLifecycleVersion = "1.+"
     androidKtxVersion = "2.+"
     kotlinVersionCore = "1.3.5"
-    roomVersion = "2.2.3"
+    roomVersion = "2.2.5"
     androidKtxLifecycle = "2.2.+"
     androidKtxLifecycle_livedata = "2.2.0-alpha01"
     mockitoVersion = "2.+"
     androidxBasics = "1.1.0"
     androidxLegacy = "1.0.0"
-    materialLibrary = "1.0.0"
+    materialLibrary = "1.2.0"
     androidxContraintLayout = "1.1.3"
     androidxEspresso = "3.1.0"
     androidxArch = "2.1.0"
     androidxTest = "1.0.0"
+    pagingVersion = "1.0.+"
 
 
 

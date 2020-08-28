@@ -3,30 +3,42 @@ package com.example.rafaelanastacioalves.pokedex.ui.pokemon_listing;
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
+import androidx.annotation.NonNull
+import androidx.paging.PagedListAdapter
+import androidx.recyclerview.widget.DiffUtil
 import com.example.rafaelanastacioalves.pokedex.R
 import com.example.rafaelanastacioalves.pokedex.domain.entities.PokemonReference
 import com.example.rafaelanastacioalves.pokedex.listeners.RecyclerViewClickListener
 
-class PokemonListingAdapter(context: Context) : RecyclerView.Adapter<PokemonLIstingViewHolder>() {
+class PokemonListingAdapter(diffCallback : DiffUtil.ItemCallback<PokemonReference>) : PagedListAdapter<PokemonReference, PokemonLIstingViewHolder>(diffCallback) {
+    constructor(context: Context) : this(DIFF_CALLBACK as DiffUtil.ItemCallback<PokemonReference>){
+        mContext = context
+    }
+
+    private lateinit var mContext: Context
+
+    companion object {
+        protected val DIFF_CALLBACK: DiffUtil.ItemCallback<PokemonReference?> = object : DiffUtil.ItemCallback<PokemonReference?>() {
+            override fun areItemsTheSame(@NonNull pokemonReference: PokemonReference, @NonNull t1: PokemonReference): Boolean {
+                return pokemonReference.name.equals(t1.name) && pokemonReference.position.equals(t1.position)
+            }
+
+            override fun areContentsTheSame(@NonNull pokemonReference: PokemonReference, @NonNull t1: PokemonReference): Boolean {
+                return pokemonReference.equals(t1)
+            }
+        }
+    }
     lateinit private var recyclerViewClickListener: RecyclerViewClickListener
-    private var mainList: List<PokemonReference>? = null
     private var intermediateList: List<PokemonReference>? = null
-
-    private val mContext: Context = context
-
     fun setRecyclerViewClickListener(aRVC: RecyclerViewClickListener ) {
         this.recyclerViewClickListener = aRVC;
     }
 
     fun getItems(): List<PokemonReference>? {
-        return if (intermediateList!=null) intermediateList else {mainList}
+        return if (intermediateList!=null) intermediateList else {currentList}
     }
 
-    fun setItems(items: List<PokemonReference>?) {
-        this.mainList = items
-        updateList()
-    }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonLIstingViewHolder  {
         return PokemonLIstingViewHolder(LayoutInflater.from(parent.getContext())
@@ -34,17 +46,20 @@ class PokemonListingAdapter(context: Context) : RecyclerView.Adapter<PokemonLIst
     }
 
     override fun onBindViewHolder(holder: PokemonLIstingViewHolder, position: Int ) {
-        val pokemonResult = getItems()?.get(position) as PokemonReference;
+        val pokemonResult: PokemonReference
+        if (intermediateList!=null){
+            pokemonResult = intermediateList!![position]
+        }else{
+            pokemonResult = getItem(position) as PokemonReference;
+        }
         holder.bind(pokemonResult, mContext)
     }
 
     override fun getItemCount(): Int {
        if (intermediateList !=null){
            return intermediateList!!.size
-       }else if (mainList !=null ) {
-           return mainList!!.size
        }else {
-           return 0
+           return super.getItemCount()
        }
     }
 
@@ -56,9 +71,11 @@ class PokemonListingAdapter(context: Context) : RecyclerView.Adapter<PokemonLIst
         if (newText.isNullOrEmpty()){
             intermediateList = null
         }else if(newText.isNotBlank()){
-            intermediateList =  mainList?.filter { it.name.contains(newText) }
+            intermediateList =  currentList?.filter { it.name.contains(newText) }
         }
         notifyDataSetChanged()
     }
+
+
 }
 

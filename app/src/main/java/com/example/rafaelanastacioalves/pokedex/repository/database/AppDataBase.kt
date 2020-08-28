@@ -1,20 +1,26 @@
 package com.example.rafaelanastacioalves.pokedex.repository.database;
 
 import android.content.Context
-import androidx.room.Database;
+import androidx.room.Database
 import androidx.room.Room
-import androidx.room.RoomDatabase;
-import com.example.rafaelanastacioalves.pokedex.domain.entities.MainEntity;
+import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import com.example.rafaelanastacioalves.pokedex.domain.entities.PokemonReference
+import com.example.rafaelanastacioalves.pokedex.domain.entities.pokemon.Form
+import com.example.rafaelanastacioalves.pokedex.domain.entities.pokemon.Pokemon
+import com.example.rafaelanastacioalves.pokedex.domain.entities.pokemon.Type
+import com.example.rafaelanastacioalves.pokedex.domain.entities.pokemon.TypeDetails
 
 
-@Database(entities = [PokemonReference::class], version = 1)
+@Database(entities = [PokemonReference::class,
+    Pokemon::class],
+        version = 5)
+@TypeConverters(Converters::class)
 abstract class AppDataBase : RoomDatabase() {
     abstract fun appDAO(): DAO
-
     companion object {
 
-        val databaseName : String = "applicationDB"
+        val databaseName : String = "pokemonDB"
         private lateinit var context: Context
         private val INSTANCE: AppDataBase by lazy {
             synchronized(this) {
