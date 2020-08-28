@@ -41,9 +41,13 @@ Nos demais sistemas operacionais: Utilizar comando equivalente
 
 ## Itens não realizados
 
+- Ao tocar em uma habilidade, exibir um modal com a descrição (por motivos de tempo)
+- Ao tocar em um tipo, exibir a lista dos pokemons desse mesmo tipo (por motivos de tempo)
+- Exibir a cadeia de evolução do Pokémon (por motivos de tempo)
+- Exibir spinner (combobox) que permita selecionar as variações do Pokémon (ao selecionar uma variação, o app deve carregar automaticamente os dados da variação selecionada) (por motivos de tempo)
 - Injeção de dependência
 - Fim de scroll infinito (condição de parada) 
-- Exibição de imagem dos pokemons na tela de listagens (explicação depois)
+- Exibição de imagem dos pokemons na tela de listagens (explicação a seguir)
 - Testes de UI (por motivos de tempo).
 - Shared element transitions (sei fazer, mas não implementei por não mostrar a imagem na listagem inicial)
 
